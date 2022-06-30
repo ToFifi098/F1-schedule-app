@@ -4,8 +4,10 @@ import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:web_scrap/Event.dart';
+import 'package:web_scrap/card.dart';
 
 import 'myAppBar.dart';
+
 
 void main() => runApp(MyWidget());
 
@@ -63,10 +65,7 @@ class _MyWidgetState extends State<MyWidget> {
                 padding: const EdgeInsets.all(8),
                 itemCount: eventList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 50,
-                    child: Center(child: Text(eventList[index].title)),
-                  );
+                  return MyCard(eventList[index]);
                 },
                 separatorBuilder: (BuildContext context, int index) =>
                     const Divider(),
