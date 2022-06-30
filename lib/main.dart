@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class _MyWidgetState extends State<MyWidget> {
       Uri.parse('https://www.formula1.com/en/racing/2022.html'),
     );
 
-    dom.Document html = dom.Document.html(response.body);
+    dom.Document html = dom.Document.html( utf8.decode(latin1.encode(response.body), allowMalformed: true));
 
     var eventList_child = html.getElementsByClassName('event-list')[0].children[0].children[0].children;
 
