@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:google_fonts/google_fonts.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -10,7 +8,7 @@ import 'package:web_scrap/card.dart';
 import 'myAppBar.dart';
 
 
-void main() => runApp(MyWidget());
+void main() => runApp(const MyWidget());
 
 class MyWidget extends StatefulWidget {
   const MyWidget({Key? key}) : super(key: key);
@@ -31,30 +29,30 @@ class _MyWidgetState extends State<MyWidget> {
     dom.Document html = dom.Document.html(
         utf8.decode(latin1.encode(response.body), allowMalformed: true));
 
-    var eventList_child = html
+    var eventListChild = html
         .getElementsByClassName('event-list')[0]
         .children[0]
         .children[0]
         .children;
 
-    for (int i = 1; i < eventList_child.length; i++) {
+    for (int i = 1; i < eventListChild.length; i++) {
       String needle = '<img data-src="';
 
-      var innerHtm = eventList_child[i].getElementsByClassName('country-flag')[0].innerHtml;
-      innerHtm = eventList_child[i].getElementsByClassName('country-flag')[0].innerHtml.substring(innerHtm.indexOf(needle) + needle.length);
+      var innerHtm = eventListChild[i].getElementsByClassName('country-flag')[0].innerHtml;
+      innerHtm = eventListChild[i].getElementsByClassName('country-flag')[0].innerHtml.substring(innerHtm.indexOf(needle) + needle.length);
       String img = innerHtm.substring(0, innerHtm.indexOf('"'));
 
-      innerHtm = eventList_child[i].innerHtml;
+      innerHtm = eventListChild[i].innerHtml;
       innerHtm = innerHtm.substring(innerHtm.indexOf('"') + 1);
       String href = innerHtm.substring(0, innerHtm.indexOf('"'));
 
       eventList.add(Event(
-          eventList_child[i].getElementsByClassName('card-title')[0].text,
-          eventList_child[i].getElementsByClassName('start-date')[0].text,
-          eventList_child[i].getElementsByClassName('end-date')[0].text,
-          eventList_child[i].getElementsByClassName('month-wrapper')[0].text,
-          eventList_child[i].getElementsByClassName('event-place')[0].text,
-          eventList_child[i].getElementsByClassName('event-title')[0].text,
+          eventListChild[i].getElementsByClassName('card-title')[0].text,
+          eventListChild[i].getElementsByClassName('start-date')[0].text,
+          eventListChild[i].getElementsByClassName('end-date')[0].text,
+          eventListChild[i].getElementsByClassName('month-wrapper')[0].text,
+          eventListChild[i].getElementsByClassName('event-place')[0].text,
+          eventListChild[i].getElementsByClassName('event-title')[0].text,
           img,
           href));
     }
@@ -71,7 +69,7 @@ class _MyWidgetState extends State<MyWidget> {
     }
     return MaterialApp(
       home: Scaffold(
-        appBar: MyAppBar(),
+        appBar:const MyAppBar(),
         body: isLoading
             ? const CircularProgressIndicator()
             : ListView.separated(
@@ -81,7 +79,7 @@ class _MyWidgetState extends State<MyWidget> {
                   return MyCard(eventList[index]);
                 },
                 separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
+                    Container(padding:const EdgeInsets.all(1),),
               ),
       ),
     );

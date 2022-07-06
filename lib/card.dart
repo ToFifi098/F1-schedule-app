@@ -8,7 +8,7 @@ import 'Event.dart';
 Event event = Event("", "", "", "", "", "", "","");
 
 class MyCard extends StatefulWidget {
-  MyCard(Event ev) {
+  MyCard(Event ev, {Key? key}) : super(key: key) {
     event = ev;
   }
   @override
