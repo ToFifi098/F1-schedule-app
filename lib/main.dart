@@ -44,6 +44,10 @@ class _MyWidgetState extends State<MyWidget> {
       innerHtm = eventList_child[i].getElementsByClassName('country-flag')[0].innerHtml.substring(innerHtm.indexOf(needle) + needle.length);
       String img = innerHtm.substring(0, innerHtm.indexOf('"'));
 
+      innerHtm = eventList_child[i].innerHtml;
+      innerHtm = innerHtm.substring(innerHtm.indexOf('"') + 1);
+      String href = innerHtm.substring(0, innerHtm.indexOf('"'));
+
       eventList.add(Event(
           eventList_child[i].getElementsByClassName('card-title')[0].text,
           eventList_child[i].getElementsByClassName('start-date')[0].text,
@@ -51,7 +55,8 @@ class _MyWidgetState extends State<MyWidget> {
           eventList_child[i].getElementsByClassName('month-wrapper')[0].text,
           eventList_child[i].getElementsByClassName('event-place')[0].text,
           eventList_child[i].getElementsByClassName('event-title')[0].text,
-          img));
+          img,
+          href));
     }
 
     setState(() {

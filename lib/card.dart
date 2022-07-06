@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:web_scrap/race_info.dart';
 
 import 'Event.dart';
 
-Event event = Event("", "", "", "", "", "", "");
+Event event = Event("", "", "", "", "", "", "","");
 
 class MyCard extends StatefulWidget {
   MyCard(Event ev) {
@@ -19,7 +20,8 @@ class MyCardState extends State<MyCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => race_info(event.href)));
       },
       child: Stack(
         children: <Widget>[
