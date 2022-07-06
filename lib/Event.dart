@@ -5,7 +5,8 @@ class Event{
   String month;
   String place;
   String title;
+  String img;
 
-  Event(this.cardTitle, this.startDate, this.endDate, this.month, this.place, this.title);
+  Event(this.cardTitle, this.startDate, this.endDate, this.month, this.place, this.title, this.img);
 
 }

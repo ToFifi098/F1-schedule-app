@@ -59,6 +59,9 @@ flutter:
   - family: Formula1
     fonts:
       - asset: fonts/Formula1-Wide_web_0.ttf
+  - family: Formula1-R
+    fonts:
+      - asset: fonts/Formula1-Regular_web_0.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
