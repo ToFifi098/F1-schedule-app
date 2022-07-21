@@ -5,7 +5,7 @@ import 'package:web_scrap/race_info.dart';
 
 import 'Event.dart';
 
-Event event = Event("", "", "", "", "", "", "","");
+Event event = Event("", "", "", "", "", "", "","","");
 
 class MyCard extends StatefulWidget {
   MyCard(Event ev, {Key? key}) : super(key: key) {

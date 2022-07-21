@@ -9,7 +9,8 @@ class Event{
   String title;
   String img;
   String href;
+  String status;
 
-  Event(this.cardTitle, this.startDate, this.endDate, this.month, this.place, this.title, this.img, this.href);
+  Event(this.cardTitle, this.startDate, this.endDate, this.month, this.place, this.title, this.img, this.href, this.status);
 
 }

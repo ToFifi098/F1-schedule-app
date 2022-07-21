@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:web_scrap/Event.dart';
@@ -22,6 +23,9 @@ class _MyWidgetState extends State<MyWidget> {
   bool isLoading = true;
 
   void getData() async {
+
+    DateTime now = DateTime.now();                                                
+
     final response = await http.Client().get(
       Uri.parse('https://www.formula1.com/en/racing/2022.html'),
     );
@@ -45,16 +49,47 @@ class _MyWidgetState extends State<MyWidget> {
       innerHtm = eventListChild[i].innerHtml;
       innerHtm = innerHtm.substring(innerHtm.indexOf('"') + 1);
       String href = innerHtm.substring(0, innerHtm.indexOf('"'));
+      String status = "";
+      String startDate =  eventListChild[i].getElementsByClassName('start-date')[0].text;
+      String endDate = eventListChild[i].getElementsByClassName('end-date')[0].text;
 
+      String month;
+      if(eventListChild[i].getElementsByClassName('ongoing').isNotEmpty){
+        month = "";
+        status = "ongoing";
+      }
+      else {
+        month = eventListChild[i].getElementsByClassName('month-wrapper')[0].text;
+        if(now.month > int.parse(month)){
+          status = "finished";
+        }
+        else if(now.month == int.parse(month)){
+          if(now.day > int.parse(endDate)){
+            status = "finished";
+          }
+          else if(now.day >= int.parse(startDate) && now.day <= int.parse(endDate)){
+            status = "ongoing";
+          }
+          else if(now.day < int.parse(startDate)){
+            status = "upcoming";
+          }
+        }
+        else if(now.month < int.parse(month) ){
+          status = "upcoming";
+        }
+      }
+
+          
       eventList.add(Event(
           eventListChild[i].getElementsByClassName('card-title')[0].text,
-          eventListChild[i].getElementsByClassName('start-date')[0].text,
-          eventListChild[i].getElementsByClassName('end-date')[0].text,
-          eventListChild[i].getElementsByClassName('month-wrapper')[0].text,
+          startDate,
+          endDate,
+          month,
           eventListChild[i].getElementsByClassName('event-place')[0].text,
           eventListChild[i].getElementsByClassName('event-title')[0].text,
           img,
-          href));
+          href,
+          status));
     }
 
     setState(() {
