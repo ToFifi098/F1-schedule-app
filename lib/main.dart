@@ -8,7 +8,6 @@ import 'package:web_scrap/card.dart';
 
 import 'myAppBar.dart';
 
-
 void main() => runApp(const MyWidget());
 
 class MyWidget extends StatefulWidget {
@@ -23,8 +22,7 @@ class _MyWidgetState extends State<MyWidget> {
   bool isLoading = true;
 
   void getData() async {
-
-    DateTime now = DateTime.now();                                                
+    DateTime now = DateTime.now();
 
     final response = await http.Client().get(
       Uri.parse('https://www.formula1.com/en/racing/2022.html'),
@@ -39,51 +37,50 @@ class _MyWidgetState extends State<MyWidget> {
         .children[0]
         .children;
 
+    int completedLength = html.getElementsByClassName('event-list')[0]
+        .children[0]
+        .children[0].getElementsByClassName('completed').length;
+
     for (int i = 1; i < eventListChild.length; i++) {
       String needle = '<img data-src="';
 
-      var innerHtm = eventListChild[i].getElementsByClassName('country-flag')[0].innerHtml;
-      innerHtm = eventListChild[i].getElementsByClassName('country-flag')[0].innerHtml.substring(innerHtm.indexOf(needle) + needle.length);
+      var innerHtm =
+          eventListChild[i].getElementsByClassName('country-flag')[0].innerHtml;
+      innerHtm = eventListChild[i]
+          .getElementsByClassName('country-flag')[0]
+          .innerHtml
+          .substring(innerHtm.indexOf(needle) + needle.length);
       String img = innerHtm.substring(0, innerHtm.indexOf('"'));
 
       innerHtm = eventListChild[i].innerHtml;
       innerHtm = innerHtm.substring(innerHtm.indexOf('"') + 1);
       String href = innerHtm.substring(0, innerHtm.indexOf('"'));
+
+
       String status = "";
-      String startDate =  eventListChild[i].getElementsByClassName('start-date')[0].text;
-      String endDate = eventListChild[i].getElementsByClassName('end-date')[0].text;
+
+      if(i <= completedLength){
+        status = "completed";
+      }
+      else{
+        status = "upcoming";
+      }
 
       String month;
-      if(eventListChild[i].getElementsByClassName('ongoing').isNotEmpty){
+      if (eventListChild[i].getElementsByClassName('ongoing').isNotEmpty) {
         month = "";
         status = "ongoing";
-      }
-      else {
-        month = eventListChild[i].getElementsByClassName('month-wrapper')[0].text;
-        if(now.month > int.parse(month)){
-          status = "finished";
-        }
-        else if(now.month == int.parse(month)){
-          if(now.day > int.parse(endDate)){
-            status = "finished";
-          }
-          else if(now.day >= int.parse(startDate) && now.day <= int.parse(endDate)){
-            status = "ongoing";
-          }
-          else if(now.day < int.parse(startDate)){
-            status = "upcoming";
-          }
-        }
-        else if(now.month < int.parse(month) ){
-          status = "upcoming";
-        }
+      } else {
+        month =
+            eventListChild[i].getElementsByClassName('month-wrapper')[0].text;
       }
 
-          
+      
+
       eventList.add(Event(
           eventListChild[i].getElementsByClassName('card-title')[0].text,
-          startDate,
-          endDate,
+          eventListChild[i].getElementsByClassName('start-date')[0].text,
+          eventListChild[i].getElementsByClassName('end-date')[0].text,
           month,
           eventListChild[i].getElementsByClassName('event-place')[0].text,
           eventListChild[i].getElementsByClassName('event-title')[0].text,
@@ -104,7 +101,7 @@ class _MyWidgetState extends State<MyWidget> {
     }
     return MaterialApp(
       home: Scaffold(
-        appBar:const MyAppBar(),
+        appBar: const MyAppBar(),
         body: isLoading
             ? const CircularProgressIndicator()
             : ListView.separated(
@@ -114,7 +111,9 @@ class _MyWidgetState extends State<MyWidget> {
                   return MyCard(eventList[index]);
                 },
                 separatorBuilder: (BuildContext context, int index) =>
-                    Container(padding:const EdgeInsets.all(1),),
+                    Container(
+                  padding: const EdgeInsets.all(1),
+                ),
               ),
       ),
     );

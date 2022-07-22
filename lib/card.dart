@@ -5,7 +5,7 @@ import 'package:web_scrap/race_info.dart';
 
 import 'Event.dart';
 
-Event event = Event("", "", "", "", "", "", "","","");
+Event event = Event("", "", "", "", "", "", "", "", "");
 
 class MyCard extends StatefulWidget {
   MyCard(Event ev, {Key? key}) : super(key: key) {
@@ -76,18 +76,24 @@ class MyCardState extends State<MyCard> {
                           )
                         ]),
                     //Image
-                    Container(
-                      padding: EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        child: Image.network(
-                          event.img,
-                          width: 50,
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            child: Image.network(
+                              event.img,
+                              width: 50,
+                            ),
+                          ),
                         ),
-                      ),
+                        if(event.status == "completed")Text(event.status) 
+                      ],
                     )
                   ],
                 ),
