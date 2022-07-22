@@ -39,7 +39,7 @@ class _MyWidgetState extends State<MyWidget> {
 
     int completedLength = html.getElementsByClassName('event-list')[0]
         .children[0]
-        .children[0].getElementsByClassName('completed').length;
+        .children[0].getElementsByClassName('completed').length + 2;
 
     for (int i = 1; i < eventListChild.length; i++) {
       String needle = '<img data-src="';
@@ -61,6 +61,7 @@ class _MyWidgetState extends State<MyWidget> {
 
       if(i <= completedLength){
         status = "completed";
+        print(completedLength);
       }
       else{
         status = "upcoming";
@@ -68,7 +69,7 @@ class _MyWidgetState extends State<MyWidget> {
 
       String month;
       if (eventListChild[i].getElementsByClassName('ongoing').isNotEmpty) {
-        month = "";
+        month = "Now";
         status = "ongoing";
       } else {
         month =

@@ -3,15 +3,20 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:web_scrap/Event.dart';
 import 'package:web_scrap/myAppBar.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
+import 'package:web_scrap/race_completed.dart';
+
+Event event = Event("", "", "", "", "", "", "", "", "");
 
 String href = "";
 
 class race_info extends StatefulWidget {
-  race_info(String url, {Key? key}) : super(key: key) {
-    href = url;
+  race_info(Event ev, {Key? key}) : super(key: key) {
+    event = ev;
+    href = ev.href;
   }
 
   @override
@@ -29,8 +34,6 @@ class _race_infoState extends State<race_info> {
     dom.Document html = dom.Document.html(
         utf8.decode(latin1.encode(response.body), allowMalformed: true));
 
-    
-
     setState(() {
       isLoading = false;
     });
@@ -38,10 +41,14 @@ class _race_infoState extends State<race_info> {
 
   @override
   Widget build(BuildContext context) {
-    if(isLoading) getData();
+    if (isLoading) getData();
     return Scaffold(
       appBar: const MyAppBar(),
-      body: isLoading ? const CircularProgressIndicator() : Text(href),
+      body: isLoading
+          ? const CircularProgressIndicator()
+          : event.status == "completed"
+              ? RaceCompleted()
+              : Text('notcompleted'),
     );
   }
 }

@@ -13,6 +13,7 @@ class MyCard extends StatefulWidget {
   }
   @override
   State<MyCard> createState() => MyCardState();
+  
 }
 
 class MyCardState extends State<MyCard> {
@@ -21,7 +22,7 @@ class MyCardState extends State<MyCard> {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => race_info(event.href)));
+            MaterialPageRoute(builder: (context) => race_info(event)));
       },
       child: Stack(
         children: <Widget>[
@@ -92,7 +93,7 @@ class MyCardState extends State<MyCard> {
                             ),
                           ),
                         ),
-                        if(event.status == "completed")Text(event.status) 
+                        if(event.status == "completed")Text(event.status)
                       ],
                     )
                   ],
