@@ -21,7 +21,7 @@ class _RaceCompletedState extends State<RaceCompleted> {
   bool isLoading = true;
 
   void getData() async {
-    final response = await http.Client().get(
+    var response = await http.Client().get(
       Uri.parse('https://www.formula1.com${event.href}'),
     );
 
@@ -43,7 +43,24 @@ class _RaceCompletedState extends State<RaceCompleted> {
 
         raceHtml = raceHtml.substring(0, raceHtml.indexOf('"'));
 
-        print(raceHtml);
+    var qualiHtml = html
+        .getElementsByClassName('js-qualifying')[0]
+        .getElementsByClassName('f1-timetable--actions')[0]
+        .innerHtml
+        .substring(html
+                .getElementsByClassName('js-qualifying')[0]
+                .getElementsByClassName('f1-timetable--actions')[0]
+                .innerHtml
+                .indexOf(needle) +
+            needle.length);
+
+        qualiHtml = qualiHtml.substring(0, qualiHtml.indexOf('"'));
+
+    response = await http.Client().get(
+      Uri.parse(raceHtml),
+    );
+
+    
 
     setState(() {
       isLoading = false;

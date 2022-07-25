@@ -39,7 +39,7 @@ class _MyWidgetState extends State<MyWidget> {
         .children[0]
         .children[0].getElementsByClassName('completed').length + 2;
 
-    for (int i = 1; i < eventListChild.length; i++) {
+    for (int i = 3; i < eventListChild.length; i++) {
       String needle = '<img data-src="';
 
       var innerHtm =
