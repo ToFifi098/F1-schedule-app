@@ -1,9 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
+import 'package:web_scrap/Event.dart';
+import 'package:web_scrap/myAppBar.dart';
+
+Event event = Event("", "", "", "", "", "", "", "", "");
 
 class RaceCompleted extends StatefulWidget {
-  const RaceCompleted({Key? key}) : super(key: key);
+  RaceCompleted(Event ev, {Key? key}) : super(key: key){
+    event = ev;
+  }
 
   @override
   State<RaceCompleted> createState() => _RaceCompletedState();
@@ -12,6 +16,9 @@ class RaceCompleted extends StatefulWidget {
 class _RaceCompletedState extends State<RaceCompleted> {
   @override
   Widget build(BuildContext context) {
-    return Text('completed');
+    return Scaffold(
+      appBar: MyAppBar(),
+      body: Text(event.place),
+    );
   }
 }

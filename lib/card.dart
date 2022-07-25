@@ -17,7 +17,7 @@ class MyCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => race_info(event)));
+            MaterialPageRoute(builder: (context) => raceInfo(event)));
       },
       child: Stack(
         children: <Widget>[
