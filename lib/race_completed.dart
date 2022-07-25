@@ -41,7 +41,7 @@ class _RaceCompletedState extends State<RaceCompleted> {
                 .indexOf(needle) +
             needle.length);
 
-        raceHtml = raceHtml.substring(0, raceHtml.indexOf('"'));
+    raceHtml = raceHtml.substring(0, raceHtml.indexOf('"'));
 
     var qualiHtml = html
         .getElementsByClassName('js-qualifying')[0]
@@ -54,11 +54,14 @@ class _RaceCompletedState extends State<RaceCompleted> {
                 .indexOf(needle) +
             needle.length);
 
-        qualiHtml = qualiHtml.substring(0, qualiHtml.indexOf('"'));
+    qualiHtml = qualiHtml.substring(0, qualiHtml.indexOf('"'));
 
     response = await http.Client().get(
       Uri.parse(raceHtml),
     );
+
+    html = dom.Document.html(
+        utf8.decode(latin1.encode(response.body), allowMalformed: true));
 
     
 
