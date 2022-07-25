@@ -46,9 +46,7 @@ class _race_infoState extends State<race_info> {
       appBar: const MyAppBar(),
       body: isLoading
           ? const CircularProgressIndicator()
-          : event.status == "completed"
-              ? RaceCompleted()
-              : Text('notcompleted'),
+          : Text(href),
     );
   }
 }

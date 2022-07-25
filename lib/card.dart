@@ -5,18 +5,13 @@ import 'package:web_scrap/race_info.dart';
 
 import 'Event.dart';
 
-Event event = Event("", "", "", "", "", "", "", "", "");
 
-class MyCard extends StatefulWidget {
-  MyCard(Event ev, {Key? key}) : super(key: key) {
-    event = ev;
-  }
-  @override
-  State<MyCard> createState() => MyCardState();
-  
-}
 
-class MyCardState extends State<MyCard> {
+class MyCard extends StatelessWidget {
+
+  final Event event;
+  const MyCard(this.event, {Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -134,4 +129,6 @@ class MyCardState extends State<MyCard> {
       ),
     );
   }
+  
 }
+

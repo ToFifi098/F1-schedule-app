@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:html/dom.dart' as dom;
-import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:web_scrap/Event.dart';
@@ -22,7 +21,6 @@ class _MyWidgetState extends State<MyWidget> {
   bool isLoading = true;
 
   void getData() async {
-    DateTime now = DateTime.now();
 
     final response = await http.Client().get(
       Uri.parse('https://www.formula1.com/en/racing/2022.html'),
@@ -61,7 +59,7 @@ class _MyWidgetState extends State<MyWidget> {
 
       if(i <= completedLength){
         status = "completed";
-        print(completedLength);
+
       }
       else{
         status = "upcoming";
