@@ -63,7 +63,7 @@ class _RaceCompletedState extends State<RaceCompleted> {
     html = dom.Document.html(
         utf8.decode(latin1.encode(response.body), allowMalformed: true));
 
-    
+    print(html.getElementsByClassName('resultsarchive-table')[0].children[0].text);
 
     setState(() {
       isLoading = false;
