@@ -19,7 +19,7 @@ class RaceCompleted extends StatefulWidget {
 
 class _RaceCompletedState extends State<RaceCompleted> {
   bool isLoading = true;
-  var raceResults = [[]]; 
+  List<List<String>> raceResults = []; 
 
   void getData() async {
     var response = await http.Client().get(
@@ -69,7 +69,7 @@ class _RaceCompletedState extends State<RaceCompleted> {
     for(int i = 0; i < html.getElementsByClassName('resultsarchive-table')[0].children[1].children.length; i++){
       var temp = html.getElementsByClassName('resultsarchive-table')[0].children[1].children[i].children;
       
-
+      raceResults.add([temp[1].text, temp[2].text.trim(), temp[3].text.trim(),temp[4].text.trim(),temp[5].text.trim(),temp[6].text.trim(),temp[7].text.trim()]);
     }
 
     setState(() {
@@ -82,7 +82,10 @@ class _RaceCompletedState extends State<RaceCompleted> {
     if (isLoading) {
       getData();
     }
-    print(raceResults[0]);
+    if(raceResults.isNotEmpty){
+      print(raceResults[4]);
+    }
+    
     return Scaffold(
       appBar: const MyAppBar(),
       body: isLoading ? const CircularProgressIndicator() : Text("ds"),
