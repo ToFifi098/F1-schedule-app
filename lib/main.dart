@@ -23,7 +23,7 @@ class _MyWidgetState extends State<MyWidget> {
   void getData() async {
 
     final response = await http.Client().get(
-      Uri.parse('https://www.formula1.com/en/racing/2022.html'),
+      Uri.parse('https://www.formula1.com/en/racing/2023.html'),
     );
 
     dom.Document html = dom.Document.html(
