@@ -1,16 +1,6 @@
-# web_scrap
+# Flutter F1 web scrap app
 
-A new Flutter project.
+Web scrapper app in Flutter
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_3](https://user-images.githubusercontent.com/88771960/211306397-b469f189-6b7f-4035-8a89-e54f8875f1fe.png)
+![Screenshot_4](https://user-images.githubusercontent.com/88771960/211306408-f2131b18-aca8-4820-bd67-d3f84d86be5f.png)
