@@ -37,9 +37,9 @@ class _MyWidgetState extends State<MyWidget> {
 
     int completedLength = html.getElementsByClassName('event-list')[0]
         .children[0]
-        .children[0].getElementsByClassName('completed').length + 2;
+        .children[0].getElementsByClassName('completed').length;
 
-    for (int i = 3; i < eventListChild.length; i++) {
+    for (int i = 1; i < eventListChild.length; i++) {
       String needle = '<img data-src="';
 
       var innerHtm =

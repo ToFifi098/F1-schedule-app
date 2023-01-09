@@ -64,8 +64,6 @@ class _RaceCompletedState extends State<RaceCompleted> {
     html = dom.Document.html(
         utf8.decode(latin1.encode(response.body), allowMalformed: true));
 
-    print(html.getElementsByClassName('resultsarchive-table')[0].children[1].children[0].children.length);
-
     for(int i = 0; i < html.getElementsByClassName('resultsarchive-table')[0].children[1].children.length; i++){
       var temp = html.getElementsByClassName('resultsarchive-table')[0].children[1].children[i].children;
       
@@ -82,13 +80,10 @@ class _RaceCompletedState extends State<RaceCompleted> {
     if (isLoading) {
       getData();
     }
-    if(raceResults.isNotEmpty){
-      print(raceResults[4]);
-    }
     
     return Scaffold(
       appBar: const MyAppBar(),
-      body: isLoading ? const CircularProgressIndicator() : Text("ds"),
+      body: isLoading ? const CircularProgressIndicator() : const Text("ds"),
     );
   }
 }
